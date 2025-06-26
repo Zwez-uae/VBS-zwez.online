@@ -12,7 +12,7 @@
     :root {
       --primary: #8B5A2B;
       --secondary: #D4A76A;
-      --accent: #FFD700;
+      --accent: #FFD700; /* Golden color */
       --dark: #3E2723;
       --light: #FFF8E1;
       --success: #4CAF50;
@@ -21,53 +21,9 @@
       --team2: #e74c3c;
       --team3: #2ecc71;
       --team4: #f39c12;
+      --golden-text: #FFD700; /* Golden text color */
+      --metallic-gold: linear-gradient(to bottom, #f9e897, #e6b656, #f9e897);
     }
-    .header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.header-text {
-  text-align: center;
-  flex-grow: 1;
-  padding: 0 2rem;
-}
-
-.header-tree {
-  height: 180px;
-  width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  margin-right: 1rem;
-}
-
-.header-stamp {
-  height: 120px;
-  width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  margin-left: 1rem;
-  opacity: 0.9;
-}
-
-@media (max-width: 900px) {
-  .header-tree {
-    height: 120px;
-  }
-  
-  .header-stamp {
-    height: 80px;
-  }
-}
-
-@media (max-width: 650px) {
-  .header-tree, 
-  .header-stamp {
-    display: none;
-  }
-}
     
     * {
       box-sizing: border-box;
@@ -80,11 +36,11 @@
       background: linear-gradient(135deg, var(--primary), var(--dark));
       color: var(--light);
       min-height: 100vh;
-      padding: 2rem;
-      text-align: center;
+      padding: 1rem;
       position: relative;
       overflow-x: hidden;
-      overflow-y: hidden;
+      display: flex;
+      flex-direction: column;
     }
     
     body::before {
@@ -99,10 +55,105 @@
       z-index: -1;
     }
     
+    /* Header styling with repositioned images */
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1800px;
+      margin: 0 auto;
+      position: relative;
+      padding: 0 1rem;
+    }
+
+    .header-text {
+      text-align: center;
+      flex-grow: 1;
+      padding: 0 2rem;
+      z-index: 2;
+    }
+
+    .header-tree {
+      height: 380px; /* Increased size */
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      margin-right: -30px; /* Move to the left */
+      margin-left: -30px; /* Move to the left */
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+
+    .header-stamp {
+      height: 380px; /* Increased size */
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      margin-left: -30px; /* Move to the right */
+      margin-right: -30px; /* Move to the right */
+      opacity: 0.9;
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+
+    /* Add hover effects */
+    .header-tree:hover {
+      transform: scale(1.05) rotate(-5deg);
+    }
+
+    .header-stamp:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    /* Update responsive sizes */
+    @media (max-width: 1200px) {
+      .header-tree {
+        height: 300px;
+        margin-right: -20px;
+        margin-left: -20px;
+      }
+      
+      .header-stamp {
+        height: 300px;
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .header-tree {
+        height: 250px;
+      }
+      
+      .header-stamp {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-tree {
+        height: 200px;
+        margin-right: -15px;
+        margin-left: -15px;
+      }
+      
+      .header-stamp {
+        height: 180px;
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .header-tree, 
+      .header-stamp {
+        display: none;
+      }
+    }
+    
     .header {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       position: relative;
       animation: fadeIn 1s ease-out;
+      padding: 0.5rem 0;
     }
     
     .logo {
@@ -117,50 +168,54 @@
       margin: 0.5rem 0;
     }
     
+    /* Metallic golden text effect */
+    h1, h2, h3, h4 {
+      background: var(--metallic-gold);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.5), 0 2px 3px rgba(0,0,0,0.3);
+    }
+    
     h1 {
-      font-size: 2.5rem;
-      color: var(--accent);
+      font-size: 2.8rem;
       letter-spacing: 1px;
     }
     
     h2 {
-  font-size: 3.5rem;
-  color: white;
-  margin-top: 0.5rem;
-  background: linear-gradient(to right, var(--secondary), var(--accent));
-  -webkit-background-clip: text; /* Vendor prefix for older browsers */
-  background-clip: text; /* Standard property */
-  -webkit-text-fill-color: transparent;
-}
+      font-size: 4rem;
+      margin-top: 0.5rem;
+    }
     
     h3 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 300;
     }
     
     h4 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-top: 1rem;
-      color: var(--secondary);
     }
     
     #teams-container {
       max-width: 1800px;
       margin: 0 auto;
-      padding: 1.5rem;
+      padding: 1rem;
+      flex: 1;
+      width: 100%;
     }
     
     #teams {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
       justify-content: center;
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
     
     .team {
       background: rgba(255, 255, 255, 0.1);
-      height: 600px;
+      height: 700px; /* Increased height for new buttons */
       backdrop-filter: blur(10px);
       border-radius: 15px;
       padding: 1.5rem;
@@ -213,125 +268,138 @@
     }
     
     .team-name {
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
-      color: white;
       font-weight: 600;
     }
     
     .points-container {
-      margin: 1.5rem 0;
-      position: relative;
-    }
-    
-    .points {
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-shadow: 0 3px 6px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
-    }
-    
-    .points-change {
-      position: absolute;
-      font-size: 1.5rem;
-      font-weight: bold;
-      opacity: 0;
-      transition: all 0.5s ease;
-    }
-    
-    .points-change.positive {
-      color: var(--success);
-      top: -20px;
-      right: 20px;
-    }
-    
-    .points-change.negative {
-      color: var(--danger);
-      bottom: -20px;
-      right: 20px;
-    }
+  margin: 1.5rem 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.points {
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.points-change {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.points-change.positive {
+  color: var(--success);
+  top: -20px;
+}
+
+.points-change.negative {
+  color: var(--danger);
+  bottom: -20px;
+}
     
     .buttons {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.btn-modern {
-  width: 100px;
-  height: 60px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative;
-  overflow: hidden;
-  color: white;
-}
-
-.btn-modern::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: currentColor;
-  opacity: 0.2;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.5s ease;
-}
-
-.btn-modern:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.add {
-  background: var(--success);
-  border: 2px solid rgba(76, 175, 80, 0.7);
-  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
-}
-
-.subtract {
-  background: var(--danger);
-  border: 2px solid rgba(244, 67, 54, 0.7);
-  box-shadow: 0 3px 10px rgba(244, 67, 54, 0.3);
-}
-
-.btn-modern:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.btn-modern:active {
-  transform: translateY(1px);
-}
-
-.btn-modern i {
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
-}
-
-.btn-modern:hover i {
-  transform: scale(1.1);
-}
-
-@keyframes pulse {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.8; }
-}
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .btn-modern {
+      flex: 1;
+      height: 60px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+      color: white;
+      max-width: 120px;
+    }
+    
+    .btn-modern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: currentColor;
+      opacity: 0.2;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.5s ease;
+    }
+    
+    .btn-modern:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    .add {
+      background: var(--success);
+      border: 2px solid rgba(76, 175, 80, 0.7);
+      box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+    }
+    
+    .subtract {
+      background: var(--danger);
+      border: 2px solid rgba(244, 67, 54, 0.7);
+      box-shadow: 0 3px 10px rgba(244, 67, 54, 0.3);
+    }
+    
+    .btn-modern:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn-modern:active {
+      transform: translateY(1px);
+    }
+    
+    .btn-modern i {
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+    }
+    
+    .btn-modern:hover i {
+      transform: scale(1.1);
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
     
     .celebration {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -392,10 +460,11 @@
     }
     
     .controls {
-      margin-top: 2rem;
+      margin-top: 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
+      padding: 0.5rem;
     }
     
     .control-btn {
@@ -437,184 +506,232 @@
     /* Responsive adjustments */
     @media (max-width: 1200px) {
       h2 {
-        font-size: 3rem;
+        font-size: 3.5rem;
       }
       
       .team-name {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
       
       .points {
-        font-size: 3.5rem;
+        font-size: 4rem;
+      }
+      
+      .team {
+        height: 680px;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      #teams {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .team {
+        height: 650px;
       }
     }
     
     @media (max-width: 768px) {
       body {
-        padding: 1rem;
+        padding: 0.5rem;
       }
       
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       
       h2 {
-        font-size: 2.5rem;
+        font-size: 3rem;
       }
       
       h3 {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
       }
       
       #teams {
         grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
       }
       
       .team {
-        max-width: 400px;
-        margin: 0 auto;
+        max-width: 100%;
+        height: 620px;
+      }
+      
+      .header-text {
+        padding: 0 1rem;
       }
     }
-    .header-tree {
-  height: 340px; /* Increased from 180px */
-  width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  margin-right: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-.header-stamp {
-  height: 340px; /* Increased from 120px */
-  width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  margin-left: 1.5rem;
-  opacity: 0.9;
-  transition: transform 0.3s ease;
-}
-
-/* Add hover effects */
-.header-tree:hover {
-  transform: scale(1.05) rotate(-5deg);
-}
-
-.header-stamp:hover {
-  transform: scale(1.05) rotate(5deg);
-}
-
-/* Update responsive sizes */
-@media (max-width: 900px) {
-  .header-tree {
-    height: 300px; /* Increased from 120px */
-  }
-  
-  .header-stamp {
-    height: 300px; /* Increased from 80px */
-  }
-}
-
-@media (max-width: 768px) {
-  .header-tree {
-    height: 150px;
-  }
-  
-  .header-stamp {
-    height: 120px;
-  }
-}
-
-/* Leaderboard Overlay */
-.leaderboard {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(62, 39, 35, 0.9); /* var(--dark) at 90% opacity */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 200;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.leaderboard.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Leaderboard Card */
-.leaderboard-card {
-  background: rgba(255, 248, 225, 0.95); /* var(--light) at 95% opacity */
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  padding: 2rem;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  text-align: center;
-}
-
-.leaderboard-card h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.leaderboard-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.leaderboard-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgba(62, 39, 35, 0.2);
-}
-
-.leaderboard-item:last-child {
-  border-bottom: none;
-}
-
-.leaderboard-item .rank {
-  font-weight: 700;
-  color: var(--dark);
-}
-
-.leaderboard-item .name {
-  flex-grow: 1;
-  text-align: left;
-  margin-left: 1rem;
-  color: var(--dark);
-}
-
-.leaderboard-item .points {
-  font-weight: 600;
-  color: var(--primary);
-}
-
-/* Close Button */
-.leaderboard-close {
-  margin-top: 1.5rem;
-  padding: 0.8rem 2rem;
-  background: var(--accent);
-  color: var(--dark);
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.leaderboard-close:hover {
-  background: var(--secondary);
-  color: white;
-}
-
+    
+    /* Leaderboard Overlay */
+    .leaderboard {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(62, 39, 35, 0.9); /* var(--dark) at 90% opacity */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .leaderboard.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    /* Leaderboard Card */
+    .leaderboard-card {
+      background: rgba(255, 248, 225, 0.95); /* var(--light) at 95% opacity */
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    
+    .leaderboard-card h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .leaderboard-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .leaderboard-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(62, 39, 35, 0.2);
+    }
+    
+    .leaderboard-item:last-child {
+      border-bottom: none;
+    }
+    
+    .leaderboard-item .rank {
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .leaderboard-item .name {
+      flex-grow: 1;
+      text-align: left;
+      margin-left: 1rem;
+      color: var(--dark);
+    }
+    
+    .leaderboard-item .points {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    /* Close Button */
+    .leaderboard-close {
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      background: var(--accent);
+      color: var(--dark);
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .leaderboard-close:hover {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .leaderboard-credit {
+      font-size: 0.75rem;
+      color: rgba(62,39,35,0.5);
+      margin-top: 1rem;
+    }
+    .leaderboard-credit a {
+      color: rgba(62,39,35,0.6);
+      text-decoration: none;
+    }
+    .leaderboard-credit a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Footer positioned in bottom right corner */
+    .site-footer {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+      padding: 5px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 5px;
+    }
+    
+    .footer-content {
+      font-size: .8em;
+      padding: 0;
+      text-align: right;
+    }
+    
+    .zwez-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .zwez-link:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    
+    .copyright {
+      margin-top: 0.2rem;
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+    
+    /* Full screen adjustments */
+    body:fullscreen {
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    body:fullscreen #teams-container {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 200px);
+    }
+    
+    body:fullscreen #teams {
+      flex: 1;
+      overflow: hidden;
+      padding-bottom: 1rem;
+    }
+    
+    body:fullscreen .controls {
+      margin-top: 0;
+      padding-bottom: 0.5rem;
+    }
+    
+    body:fullscreen .header {
+      padding-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -647,10 +764,27 @@
     <div id="confetti-container"></div>
   </div>
 
+  <div class="leaderboard" id="leaderboard">
+    <div class="leaderboard-card">
+      <h2>🏆 Leaderboard 🏆</h2>
+      <ul class="leaderboard-list" id="leaderboard-list"></ul>
+      <button class="leaderboard-close" onclick="closeLeaderboard()">Close</button>
+      <div class="leaderboard-credit">
+        by <a href="https://zwez.online">zwez.online</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>Developed by <a href="https://zwez.online" target="_blank" class="zwez-link">zwez.online</a></p>
+    </div>
+  </footer>
+
   <script>
     const teams = [
-    { name: "Mission Forces", color: "--team4", image: "WhatsApp Image 2025-06-26 at 00.38.13_6b083ab9.jpg" },
-    { name: "Wisdom watchers", color: "--team3", image: "WhatsApp Image 2025-06-26 at 00.38.12_7861f07a.jpg" },
+      { name: "Mission Forces", color: "--team4", image: "WhatsApp Image 2025-06-26 at 00.38.13_6b083ab9.jpg" },
+      { name: "Wisdom watchers", color: "--team3", image: "WhatsApp Image 2025-06-26 at 00.38.12_7861f07a.jpg" },
       { name: "Truth Trackers", color: "--team1", image: "truth trackers.jpg" },
       { name: "Mystery Solvers", color: "--team2", image: "mystery solvers.jpg" },
     ];
@@ -679,13 +813,19 @@
           <div class="points-change negative" id="points-change-negative-${index}">-0</div>
         </div>
         <div class="buttons">
-  <button class="btn-modern add" onclick="changePoints(${index}, 10)">
-    <i class="fas fa-check"></i>
-  </button>
-  <button class="btn-modern subtract" onclick="changePoints(${index}, -10)">
-    <i class="fas fa-times"></i>
-  </button>
-</div>
+          <div class="button-group">
+            <button class="btn-modern add" onclick="changePoints(${index}, 5)">+5</button>
+            <button class="btn-modern subtract" onclick="changePoints(${index}, -5)">-5</button>
+          </div>
+          <div class="button-group">
+            <button class="btn-modern add" onclick="changePoints(${index}, 10)">+10</button>
+            <button class="btn-modern subtract" onclick="changePoints(${index}, -10)">-10</button>
+          </div>
+          <div class="button-group">
+            <button class="btn-modern add" onclick="changePoints(${index}, 100)">+100</button>
+            <button class="btn-modern subtract" onclick="changePoints(${index}, -100)">-100</button>
+          </div>
+        </div>
       `;
       
       container.appendChild(teamDiv);
@@ -720,7 +860,7 @@
       }, 1000);
       
       // Check for winner (300 points for demo, adjust as needed)
-      if (teamPoints[index] >= 30000000000000000000) {
+      if (teamPoints[index] >= 300000000000000000000000000000000000000000000000000000000) {
         showCelebration(index);
       }
     }
@@ -763,119 +903,55 @@
       }
     }
     
-function showLeaderboard() {
-  const listEl = document.getElementById('leaderboard-list');
-  listEl.innerHTML = '';  // clear old
-
-  // build sorted array
-  const leaderboard = teams
-    .map((t, i) => ({ name: t.name, points: teamPoints[i] }))
-    .sort((a, b) => b.points - a.points);
-
-  // populate list
-  leaderboard.forEach((team, idx) => {
-    const item = document.createElement('li');
-    item.className = 'leaderboard-item';
-    item.innerHTML = `
-      <span class="rank">${idx+1}.</span>
-      <span class="name">${team.name}</span>
-      <span class="points">${team.points}</span>
-    `;
-    listEl.appendChild(item);
-  });
-
-  document.getElementById('leaderboard').classList.add('active');
-}
-
-function closeLeaderboard() {
-  document.getElementById('leaderboard').classList.remove('active');
-}
-
+    function showLeaderboard() {
+      const listEl = document.getElementById('leaderboard-list');
+      listEl.innerHTML = '';  // clear old
     
-    // Initialize with some random points for demo
+      // build sorted array
+      const leaderboard = teams
+        .map((t, i) => ({ name: t.name, points: teamPoints[i] }))
+        .sort((a, b) => b.points - a.points);
+    
+      // populate list
+      leaderboard.forEach((team, idx) => {
+        const item = document.createElement('li');
+        item.className = 'leaderboard-item';
+        item.innerHTML = `
+          <span class="rank">${idx+1}.</span>
+          <span class="name">${team.name}</span>
+          <span class="points">${team.points}</span>
+        `;
+        listEl.appendChild(item);
+      });
+    
+      document.getElementById('leaderboard').classList.add('active');
+    }
+    
+    function closeLeaderboard() {
+      document.getElementById('leaderboard').classList.remove('active');
+    }
+    
+    // Initialize with zero points
     window.onload = () => {
       for (let i = 0; i < teams.length; i++) {
-        teamPoints[i] = Math.floor(0);
+        teamPoints[i] = 0;
         document.getElementById(`points-${i}`).textContent = teamPoints[i];
       }
     };
-
-    // anywhere after your page loads
-document.body.style.zoom = "73%";
-
     
+    // Full screen handling
+    document.addEventListener('fullscreenchange', adjustLayout);
+    document.addEventListener('webkitfullscreenchange', adjustLayout);
+    document.addEventListener('mozfullscreenchange', adjustLayout);
+    document.addEventListener('MSFullscreenChange', adjustLayout);
+    
+    function adjustLayout() {
+      if (document.fullscreenElement) {
+        document.body.classList.add('fullscreen');
+      } else {
+        document.body.classList.remove('fullscreen');
+      }
+    }
   </script>
-      
-  </style>
-<footer class="site-footer">
-  <div class="footer-content">
-    <p>Developed by <a href="https://zwez.online" target="_blank" class="zwez-link">zwez.online</a></p>
-  </div>
-</footer>
-
-<!-- Add this to your CSS -->
-<style>
-.site-footer {
-  position: absolute;
-  bottom: 2rem;     /* lift it up */
-  right: 1rem;   /* move it to the right */
-  width: auto;
-  margin: 0;
-}
-
-.footer-content {
-  font-size: .8em;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  text-align: right;
-}
-
-  
-  .zwez-link {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  
-  .zwez-link:hover {
-    color: white;
-    text-decoration: underline;
-  }
-  
-  .copyright {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    opacity: 0.8;
-  }
-
-  .leaderboard-credit {
-  font-size: 0.75rem;
-  color: rgba(62,39,35,0.5);
-  margin-top: 1rem;
-}
-.leaderboard-credit a {
-  color: rgba(62,39,35,0.6);
-  text-decoration: none;
-}
-.leaderboard-credit a:hover {
-  text-decoration: underline;
-}
-
-</style>
-
-<div class="leaderboard" id="leaderboard">
-  <div class="leaderboard-card">
-    <h2>🏆 Leaderboard 🏆</h2>
-    <ul class="leaderboard-list" id="leaderboard-list"></ul>
-    <button class="leaderboard-close" onclick="closeLeaderboard()">Close</button>
-    <div class="leaderboard-credit">
-  by <a href="https://zwez.online">zwez.online</a>
-</div>
-
-  </div>
-</div>
-
 </body>
 </html>
