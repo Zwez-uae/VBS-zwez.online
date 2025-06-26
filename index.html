@@ -77,13 +77,14 @@
     }
     
     h2 {
-      font-size: 3.5rem;
-      color: white;
-      margin-top: 0.5rem;
-      background: linear-gradient(to right, var(--secondary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  font-size: 3.5rem;
+  color: white;
+  margin-top: 0.5rem;
+  background: linear-gradient(to right, var(--secondary), var(--accent));
+  -webkit-background-clip: text; /* Vendor prefix for older browsers */
+  background-clip: text; /* Standard property */
+  -webkit-text-fill-color: transparent;
+}
     
     h3 {
       font-size: 1.8rem;
