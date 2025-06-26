@@ -473,6 +473,52 @@
         margin: 0 auto;
       }
     }
+    .header-tree {
+  height: 340px; /* Increased from 180px */
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  margin-right: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.header-stamp {
+  height: 340px; /* Increased from 120px */
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  margin-left: 1.5rem;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+
+/* Add hover effects */
+.header-tree:hover {
+  transform: scale(1.05) rotate(-5deg);
+}
+
+.header-stamp:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* Update responsive sizes */
+@media (max-width: 900px) {
+  .header-tree {
+    height: 300px; /* Increased from 120px */
+  }
+  
+  .header-stamp {
+    height: 300px; /* Increased from 80px */
+  }
+}
+
+@media (max-width: 768px) {
+  .header-tree {
+    height: 150px;
+  }
+  
+  .header-stamp {
+    height: 120px;
+  }
+}
   </style>
 </head>
 <body>
@@ -485,7 +531,7 @@
         <h2>VBS 2025</h2>
         <h4>Teams Points Tracker</h4>
       </div>
-      <img src="tsc.jpg" alt="Top Secret Stamp" class="header-stamp">
+      <img src="tsc.png" alt="Top Secret Stamp" class="header-stamp">
     </div>
   </div>
   
@@ -650,63 +696,48 @@
     };
     
   </script>
-  <div class="credit-badge">
-    <span>Developed by</span>
-    <a href="https://zwez.online" target="_blank">zwez.online</a>
-  </div>
-  
-  
-  <style>
-    .credit-badge {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(30, 30, 30, 0.9);
-      padding: 8px 15px;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.85rem;
-      color: #eee;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      z-index: 100;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      animation: fadeInUp 0.6s ease-out;
-    }
     
-    .credit-badge a {
-      color: #4fc3f7;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-    }
-    
-    .credit-badge a:hover {
-      color: #00b0ff;
-      text-decoration: underline;
-    }
-    
-    .credit-badge a::after {
-      content: "↗";
-      margin-left: 4px;
-      font-size: 0.8em;
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
   </style>
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>Developed by <a href="https://zwez.online" target="_blank" class="zwez-link">zwez.online</a></p>
+  </div>
+</footer>
+
+<!-- Add this to your CSS -->
+<style>
+  .site-footer {
+    margin-top: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .zwez-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .zwez-link:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  
+  .copyright {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+</style>
 </body>
 </html>
