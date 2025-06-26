@@ -84,6 +84,7 @@
       text-align: center;
       position: relative;
       overflow-x: hidden;
+      overflow-y: hidden;
     }
     
     body::before {
@@ -144,7 +145,7 @@
     }
     
     #teams-container {
-      max-width: 1500px;
+      max-width: 1800px;
       margin: 0 auto;
       padding: 1.5rem;
     }
@@ -159,6 +160,7 @@
     
     .team {
       background: rgba(255, 255, 255, 0.1);
+      height: 600px;
       backdrop-filter: blur(10px);
       border-radius: 15px;
       padding: 1.5rem;
@@ -519,6 +521,100 @@
     height: 120px;
   }
 }
+
+/* Leaderboard Overlay */
+.leaderboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(62, 39, 35, 0.9); /* var(--dark) at 90% opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.leaderboard.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Leaderboard Card */
+.leaderboard-card {
+  background: rgba(255, 248, 225, 0.95); /* var(--light) at 95% opacity */
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.leaderboard-card h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.leaderboard-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.2);
+}
+
+.leaderboard-item:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-item .rank {
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.leaderboard-item .name {
+  flex-grow: 1;
+  text-align: left;
+  margin-left: 1rem;
+  color: var(--dark);
+}
+
+.leaderboard-item .points {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Close Button */
+.leaderboard-close {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  background: var(--accent);
+  color: var(--dark);
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.leaderboard-close:hover {
+  background: var(--secondary);
+  color: white;
+}
+
   </style>
 </head>
 <body>
@@ -667,25 +763,34 @@
       }
     }
     
-    function showLeaderboard() {
-      // Create an array of teams with their points
-      const leaderboard = teams.map((team, index) => ({
-        name: team.name,
-        points: teamPoints[index],
-        color: team.color
-      }));
-      
-      // Sort by points (descending)
-      leaderboard.sort((a, b) => b.points - a.points);
-      
-      // Create leaderboard message
-      let message = '🏆 Current Leaderboard 🏆\n\n';
-      leaderboard.forEach((team, index) => {
-        message += `${index + 1}. ${team.name}: ${team.points} points\n`;
-      });
-      
-      alert(message);
-    }
+function showLeaderboard() {
+  const listEl = document.getElementById('leaderboard-list');
+  listEl.innerHTML = '';  // clear old
+
+  // build sorted array
+  const leaderboard = teams
+    .map((t, i) => ({ name: t.name, points: teamPoints[i] }))
+    .sort((a, b) => b.points - a.points);
+
+  // populate list
+  leaderboard.forEach((team, idx) => {
+    const item = document.createElement('li');
+    item.className = 'leaderboard-item';
+    item.innerHTML = `
+      <span class="rank">${idx+1}.</span>
+      <span class="name">${team.name}</span>
+      <span class="points">${team.points}</span>
+    `;
+    listEl.appendChild(item);
+  });
+
+  document.getElementById('leaderboard').classList.add('active');
+}
+
+function closeLeaderboard() {
+  document.getElementById('leaderboard').classList.remove('active');
+}
+
     
     // Initialize with some random points for demo
     window.onload = () => {
@@ -694,9 +799,13 @@
         document.getElementById(`points-${i}`).textContent = teamPoints[i];
       }
     };
+
+    // anywhere after your page loads
+document.body.style.zoom = "72%";
+
     
   </script>
-    
+      
   </style>
 <footer class="site-footer">
   <div class="footer-content">
@@ -706,20 +815,22 @@
 
 <!-- Add this to your CSS -->
 <style>
-  .site-footer {
-    margin-top: 0.5rem;
-    padding: 1.5rem;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-  }
-  
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+.site-footer {
+  position: absolute;
+  bottom: 2rem;     /* lift it up */
+  right: 1rem;   /* move it to the right */
+  width: auto;
+  margin: 0;
+}
+
+.footer-content {
+  font-size: .8em;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+
   
   .zwez-link {
     color: var(--accent);
@@ -738,6 +849,33 @@
     font-size: 0.8rem;
     opacity: 0.8;
   }
+
+  .leaderboard-credit {
+  font-size: 0.75rem;
+  color: rgba(62,39,35,0.5);
+  margin-top: 1rem;
+}
+.leaderboard-credit a {
+  color: rgba(62,39,35,0.6);
+  text-decoration: none;
+}
+.leaderboard-credit a:hover {
+  text-decoration: underline;
+}
+
 </style>
+
+<div class="leaderboard" id="leaderboard">
+  <div class="leaderboard-card">
+    <h2>🏆 Leaderboard 🏆</h2>
+    <ul class="leaderboard-list" id="leaderboard-list"></ul>
+    <button class="leaderboard-close" onclick="closeLeaderboard()">Close</button>
+    <div class="leaderboard-credit">
+  by <a href="https://zwez.online">zwez.online</a>
+</div>
+
+  </div>
+</div>
+
 </body>
 </html>
