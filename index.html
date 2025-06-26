@@ -39,6 +39,7 @@
       padding: 1rem;
       position: relative;
       overflow-x: hidden;
+      overflow-y: hidden;
       display: flex;
       flex-direction: column;
     }
@@ -461,7 +462,6 @@
     }
     
     .controls {
-      margin-top: 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
@@ -469,7 +469,7 @@
     }
     
     .control-btn {
-      padding: 0.8rem 1.5rem;
+      padding: 0.5rem 1rem;
       background: rgba(255,255,255,0.1);
       color: white;
       border: 1px solid rgba(255,255,255,0.3);
@@ -568,7 +568,7 @@
     
     /* Leaderboard Overlay */
     .leaderboard {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
@@ -603,7 +603,6 @@
     .leaderboard-card h2 {
       font-family: 'Montserrat', sans-serif;
       font-size: 2rem;
-      margin-bottom: 1rem;
     }
     
     .leaderboard-list {
@@ -642,7 +641,6 @@
     
     /* Close Button */
     .leaderboard-close {
-      margin-top: 1.5rem;
       padding: 0.8rem 2rem;
       background: var(--accent);
       color: var(--dark);
