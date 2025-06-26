@@ -22,6 +22,52 @@
       --team3: #2ecc71;
       --team4: #f39c12;
     }
+    .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header-text {
+  text-align: center;
+  flex-grow: 1;
+  padding: 0 2rem;
+}
+
+.header-tree {
+  height: 180px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  margin-right: 1rem;
+}
+
+.header-stamp {
+  height: 120px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  margin-left: 1rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+  .header-tree {
+    height: 120px;
+  }
+  
+  .header-stamp {
+    height: 80px;
+  }
+}
+
+@media (max-width: 650px) {
+  .header-tree, 
+  .header-stamp {
+    display: none;
+  }
+}
     
     * {
       box-sizing: border-box;
@@ -205,44 +251,82 @@
     }
     
     .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .btn {
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }
-    
-    .btn:active {
-      transform: translateY(0);
-    }
-    
-    .btn-add {
-      background: var(--success);
-      color: white;
-    }
-    
-    .btn-subtract {
-      background: var(--danger);
-      color: white;
-    }
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.btn-modern {
+  width: 100px;
+  height: 60px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  opacity: 0.2;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.btn-modern:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.add {
+  background: var(--success);
+  border: 2px solid rgba(76, 175, 80, 0.7);
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+}
+
+.subtract {
+  background: var(--danger);
+  border: 2px solid rgba(244, 67, 54, 0.7);
+  box-shadow: 0 3px 10px rgba(244, 67, 54, 0.3);
+}
+
+.btn-modern:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-modern:active {
+  transform: translateY(1px);
+}
+
+.btn-modern i {
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+.btn-modern:hover i {
+  transform: scale(1.1);
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
     
     .celebration {
       position: absolute;
@@ -393,11 +477,16 @@
 </head>
 <body>
   <div class="header">
-    <img src="https://via.placeholder.com/120x120.png?text=GFIM" alt="Grace Family International Ministries Logo" class="logo">
-    <h3>Grace Family International Ministries</h3>
-    <h1>Detective Academy</h1>
-    <h2>VBS 2025</h2>
-    <h4>Teams Points Tracker</h4>
+    <div class="header-container">
+      <img src="tree.png" alt="Tree" class="header-tree">
+      <div class="header-text">
+        <h3>Grace Family International Ministries</h3>
+        <h1>Detective Academy</h1>
+        <h2>VBS 2025</h2>
+        <h4>Teams Points Tracker</h4>
+      </div>
+      <img src="tsc.jpg" alt="Top Secret Stamp" class="header-stamp">
+    </div>
   </div>
   
   <div id="teams-container">
@@ -448,13 +537,13 @@
           <div class="points-change negative" id="points-change-negative-${index}">-0</div>
         </div>
         <div class="buttons">
-          <button class="btn btn-add" onclick="changePoints(${index}, 10)">
-            <i class="fas fa-plus"></i> Add 10
-          </button>
-          <button class="btn btn-subtract" onclick="changePoints(${index}, -10)">
-            <i class="fas fa-minus"></i> Subtract 10
-          </button>
-        </div>
+  <button class="btn-modern add" onclick="changePoints(${index}, 10)">
+    <i class="fas fa-check"></i>
+  </button>
+  <button class="btn-modern subtract" onclick="changePoints(${index}, -10)">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
       `;
       
       container.appendChild(teamDiv);
@@ -559,11 +648,13 @@
         document.getElementById(`points-${i}`).textContent = teamPoints[i];
       }
     };
+    
   </script>
   <div class="credit-badge">
     <span>Developed by</span>
     <a href="https://zwez.online" target="_blank">zwez.online</a>
   </div>
+  
   
   <style>
     .credit-badge {
